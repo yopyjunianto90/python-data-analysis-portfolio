@@ -1,0 +1,24 @@
+import yfinance as yf
+
+# Tentukan kode saham IDX (wajib tambahkan .JK)
+ticker_symbol = "BBCA.JK"
+
+# Buat objek Ticker
+saham = yf.Ticker(ticker_symbol)
+
+# 1. Mengambil informasi umum perusahaan
+info = saham.info
+print(f"Nama Perusahaan: {info.get('longName')}")
+print(f"Sektor: {info.get('sector')}")
+print(f"Harga Terakhir: {info.get('regularMarketPrice')}")
+print(f"Perubahan: {info.get('regularMarketChangePercent')}%")
+
+# 2. Mengambil data historis (contoh 1 bulan terakhir)
+data_historis = saham.history(period="1mo")
+
+# Menampilkan 5 data teratas
+print(data_historis.head())
+
+# 3. Menyimpan data ke file CSV
+data_historis.to_csv("data_bbca.csv")
+print("Data berhasil disimpan ke data_bbca.csv")
