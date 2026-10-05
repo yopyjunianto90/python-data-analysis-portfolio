@@ -1,0 +1,17 @@
+import yfinance as yf
+
+# Daftar kode saham IDX
+daftar_saham = ["BBCA.JK", "BBRI.JK", "TLKM.JK", "ASII.JK"]
+
+# Mengunduh data secara massal
+data_massal = yf.download(
+    tickers=daftar_saham,
+    period="1y",       # Periode: 1 bulan, 3 bulan, 1 tahun, 5 tahun, max
+    interval="1d"      # Interval: 1 hari, 1 minggu, 1 bulan
+)
+
+# Menampilkan data Close untuk semua saham
+print(data_massal["Close"].tail())
+
+# Menyimpan ke Excel
+data_massal.to_excel("data_saham_idx.xlsx")
